@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary d-flex justify-content-between">
+    <a routerLink='' class="navbar-brand pointer">APM</a>
+
+    <nav *ngIf="false" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#" style="color: bisque;">Home</a></li>
+            <li class="breadcrumb-item"><a href="#" style="color: bisque;">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="#" style="color: bisque;">Data</a></li>
+        </ol>
+    </nav>
+
+    <div>
+        <a *ngIf="grillaIcon" (click)="grillaCambio()" class="button">
+            <i class="material-icons zoom" [ngClass]="{ 'grillaOff': !grillaOn }">grid_on</i>
+        </a>
+    </div>
+</nav>

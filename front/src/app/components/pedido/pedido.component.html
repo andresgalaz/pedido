@@ -1,0 +1,93 @@
+<app-navbar [grillaIcon]="false"></app-navbar>
+<div class="container">
+    <div class="card mt-2">
+        <div class="card-body">
+            <app-spinner *ngIf="loading"></app-spinner>
+
+
+            <nav class="navbar navbar-light bg-light mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand">{{ titulo | uppercase }}</a>
+                    <div class="d-flex">
+                        <button class="btn btn-secondary" type="button" (click)="goBack()">volver</button>
+                    </div>
+                </div>
+            </nav>
+
+            <form [formGroup]="form" (ngSubmit)="savePedido()">
+                <div class="row">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i title="Fecha despacho" class="material-icons"
+                                [class.text-primary]="this.form.get('dDespacho')?.valid"
+                                [class.text-danger]="this.form.get('dDespacho')?.invalid && this.form.get('dDespacho')?.touched">
+                                today
+                            </i>
+                        </span>
+                        <input formControlName="dDespacho" min="{{dDespachoMin | date:'yyyy-MM-dd'}}"
+                            title="Fecha despacho" type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="material-icons" [class.text-primary]="this.form.get('cNota')?.valid"
+                                [class.text-danger]="this.form.get('cNota')?.invalid && this.form.get('cNota')?.touched">
+                                description
+                            </i>
+                        </span>
+                        <textarea formControlName="cNota" type="text" class="form-control"
+                            placeholder="Nota"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="material-icons" [class.text-primary]="this.form.get('fMarca')?.valid"
+                                [class.text-danger]="this.form.get('fMarca')?.invalid && this.form.get('fMarca')?.touched">
+                                list
+                            </i>
+                        </span>
+                        <ng-select  [items]="clientes" [virtualScroll]="true" bindLabel="cNombre" bindValue="pClienteSucursal"
+                            placeholder="Seleccione cliente" 
+                            formControlName="fClienteSucursal" class="form-control"
+                            > 
+                            <!--  [(ngModel)]="selectedCityId" -->
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="material-icons" [class.text-primary]="this.form.get('nPrecio')?.valid"
+                                [class.text-danger]="this.form.get('nPrecio')?.invalid && this.form.get('nPrecio')?.touched">
+                                paid
+                            </i>
+                        </span>
+                        <input formControlName="nPrecio" maxlength="16" type="number" class="form-control"
+                            placeholder="Precio">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group input-group-lg mb-3">
+                        <span class="input-group-text">
+                            <i class="material-icons" [class.text-primary]="this.form.get('cSKU')?.valid"
+                                [class.text-danger]="this.form.get('cSKU')?.invalid && this.form.get('cSKU')?.touched">
+                                tag
+                            </i>
+                        </span>
+                        <input formControlName="cSKU" maxlength="30" type="text" style="text-transform: uppercase"
+                            class="form-control" placeholder="SKU">
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button [disabled]="form.invalid" class="btn btn-primary btn-lg" type="submit"><i
+                            class="material-icons">save</i>
+                        &nbsp;Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

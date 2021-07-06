@@ -1,0 +1,15 @@
+.navbar {
+    padding: 0.5rem 1rem;
+}
+
+.navbar .material-icons {
+    color: aliceblue;
+    cursor: pointer;
+    font-family: 'Material Icons';
+    font-display: block;
+    font-size: 2rem;
+}
+
+.navbar .grillaOff {
+    color: #c9cfd4;
+}

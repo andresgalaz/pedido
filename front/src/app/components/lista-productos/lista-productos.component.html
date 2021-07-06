@@ -1,0 +1,106 @@
+<app-confirm-dialog></app-confirm-dialog>
+<app-navbar [grillaOn]="grillaOn" (grillaOnChange)="eventGrillaOn($event)"></app-navbar>
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="!grillaOn && !loading" class="fondo pt-2">
+    <div class="card-group">
+        <div class="card card-block p-3 m-2" *ngFor="let producto of productos; let i=index">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="ms-2 c-details">
+                        <h6 class="mb-0">{{producto.cSKU}}</h6>
+                    </div>
+                </div>
+                <div>
+                    <span>
+                        <i (click)="editarProducto(producto.pProducto)" class="material-icons text-primary">edit</i>
+                        &nbsp;
+                        <i (click)="eliminarProducto(producto.pProducto)" class="material-icons text-primary">delete</i>
+                    </span>
+                </div>
+            </div>
+            <div class="mt-1">
+                <h3 class="heading">{{producto.cDescripcion}}</h3>
+                <div class="stats mt-3">
+                    <div class="d-flex justify-content-between px-3">
+                        <span>Familia</span><span>{{producto.cFamilia}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between fondo px-3">
+                        <span>Marca</span><span>{{producto.cMarca}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between px-3">
+                        <span>Precio</span><span>{{producto.nPrecio | currency:'CLP':'$':'':'es-CL' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mt-2" *ngIf="grillaOn && !loading">
+    <form>
+        <div class="form-group row">
+            <div class="col-5">
+                <button routerLink="producto/nuevo" class="btn btn-sm btn-primary">
+                    <i class="material-icons" style="vertical-align: -4px; font-size: 18px;">add_circle</i>
+                    Nuevo Pedido
+                </button>
+            </div>
+            <label *ngIf="paginacion" class="col-2 col-form-label offset-2" for="regsPagina">Mostrar</label>
+            <div *ngIf="paginacion" class="col-3">
+                <select id="regsPagina" class="form-control">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>15</option>
+                    <option>20</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Descripción</th>
+                    <th *ngIf="appStateService.minMD">Familia</th>
+                    <th *ngIf="appStateService.minMD">Marca</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of productos; let i=index" (dblclick)="editarProducto(producto.pProducto)">
+                    <td>{{producto.cSKU}}</td>
+                    <td>{{producto.cDescripcion}}</td>
+                    <td *ngIf="appStateService.minMD">{{producto.cFamilia}}</td>
+                    <td *ngIf="appStateService.minMD">{{producto.cMarca}}</td>
+                    <td>{{producto.nPrecio | currency:'CLP':'$':'':'es-CL'}}</td>
+                    <td>
+                        <i (click)="editarProducto(producto.pProducto)" class="material-icons text-info">edit</i>&nbsp;
+                        <i (click)="eliminarProducto(producto.pProducto)" class="material-icons text-danger">delete</i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="paginacion" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-secondary">1</button>
+                <button type="button" class="btn btn-secondary">2</button>
+                <button type="button" class="btn btn-secondary">3</button>
+                <button type="button" class="btn btn-secondary">4</button>
+            </div>
+            <div class="btn-group me-2" role="group" aria-label="Second group">
+                <button type="button" class="btn btn-secondary">5</button>
+                <button type="button" class="btn btn-secondary">6</button>
+                <button type="button" class="btn btn-secondary">7</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">8</button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

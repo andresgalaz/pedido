@@ -1,0 +1,38 @@
+.cardx {
+    width: 444px
+}
+
+.table td {
+    padding: 0.5rem;
+}
+
+i {
+    cursor: pointer;
+}
+
+/**
+ * https://bbbootstrap.com/snippets/bootstrap-5-jobs-card-listing-59188500
+ *    INICIO
+ */
+
+.fondo {
+    background-color: #eee
+}
+
+.card {
+    border: none;
+    border-radius: 10px
+}
+
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
+
+
+
+
+/**  
+ *  https://bbbootstrap.com/snippets/bootstrap-5-jobs-card-listing-59188500
+ *  FIN
+*/
